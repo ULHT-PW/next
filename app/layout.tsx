@@ -30,7 +30,7 @@ export default function RootLayout({ children,}: Readonly<{children: React.React
           `} 
       >
 
-        <header>
+        <header className="flex flex-col items-center">
           <h1>O Meu Site</h1>
 
           <nav className="flex gap-4">
