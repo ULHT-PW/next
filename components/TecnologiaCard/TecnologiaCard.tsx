@@ -1,3 +1,4 @@
+
 interface TecnologiaProps {
     nome: string
     criador: string
@@ -6,11 +7,10 @@ interface TecnologiaProps {
 
 export default function TecnologiaCard(props: TecnologiaProps) {
 
-    return(
+    return (
         <>
-            <div className="flex flex-col items-center bg-pink-500 text-white p-3 m-2 rounded-full">
+            <div className="flex flex-col items-center bg-pink-500 hover:bg-pink-600 active:bg-pink-700 text-white p-3 m-2 rounded-full">
                 <h2>{props.nome}</h2>
-                <p>Criado por {props.criador} em {props.ano}.</p>
             </div>
         </>
     )

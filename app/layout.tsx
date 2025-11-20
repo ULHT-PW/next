@@ -36,7 +36,7 @@ export default function RootLayout({ children,}: Readonly<{children: React.React
           <nav className="flex gap-4">
             <Link href="/" className="hover:underline">Home</Link>
             <Link href="/sobre" className="hover:underline">Sobre</Link>
-            <Link href="/info" className="hover:underline">Info</Link>
+            <Link href="/tecnologias" className="hover:underline">Tecnologias</Link>
           </nav>
 
         </header>
