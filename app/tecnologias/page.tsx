@@ -8,11 +8,9 @@ import { useEffect, useState } from 'react'
 export default function TecnologiasPage() {
 
     // Gestão de Estados
-    const [gosto, setGosto] = useState(() => {
-
-        const gostoStored = localStorage.getItem('gosto')
-        return gostoStored ? Number(gostoStored) : 0
-    })
+    // Começa com 0 (sem tocar no localStorage no servidor)
+    const [gosto, setGosto] = useState(0)
+    
 
     // Event handlers
     function aumentarGosto() {
@@ -20,6 +18,12 @@ export default function TecnologiasPage() {
     }
 
     // Efeitos
+
+    // Carrega o valor de localStorage após montar no browser
+    useEffect(() => {
+        const stored = localStorage.getItem("gosto")
+        if (stored) setGosto(Number(stored))
+    }, [])
 
     useEffect(() => {
         console.log("Bemvindo!")
