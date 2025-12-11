@@ -58,6 +58,7 @@ export default function JokesPage() {
             {filteredJokes.map(joke => (
                 <Link
                     href={`jokes/${joke.id}`}
+                    key={joke.id}
                 >
                     <div className="py-2 px-4 m-2 bg-yellow-400 rounded-2xl">
                         <p className="font-bold"> {joke.setup}</p>
