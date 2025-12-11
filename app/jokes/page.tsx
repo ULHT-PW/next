@@ -1,7 +1,7 @@
 'use client'
 
 import { Joke } from '@/models/interfaces'
-import { Bold } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 
@@ -19,7 +19,6 @@ const fetcher = async (url: string) => {
 
 export default function JokesPage() {
 
-
     //
     // Estados
     const [type, setType] = useState('programming')
@@ -27,13 +26,14 @@ export default function JokesPage() {
 
     //
     // Obter (fetch) dados
-    const url = 'https://official-joke-api.appspot.com/jokes/random/100'
+
+    const url = '/api/jokes'
     const { data: jokes, error, isLoading } = useSWR<Joke[]>(url, fetcher)
 
     //
     // Efeitos
-    useEffect(()=>{
-        if(!jokes) return
+    useEffect(() => {
+        if (!jokes) return
         setFilteredJokes(jokes.filter(joke => joke.type === type))
     }, [type, jokes])
 
@@ -46,34 +46,24 @@ export default function JokesPage() {
 
     return (
         <>
-            {/* <select 
+            <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
                 className="text-2xl p-2 m-2 font-bold bg-blue-400 rounded-xl"
             >
                 <option value="programming">Programming Jokes</option>
                 <option value="general">General Jokes</option>
-            </select> */}
-
-            <button
-                className={`p-2 m-2 bg-blue-400 hover:bg-blue-500 active:bg-blue-600 rounded-xl ${type=='programming' ? 'font-bold': ''}`}
-                onClick={() => setType('programming')}
-            >
-                Programming Jokes
-            </button>
-
-            <button
-                className={`p-2 m-2 bg-blue-400 hover:bg-blue-500 active:bg-blue-600 rounded-xl ${type=='general' ? 'font-bold': ''}`}
-                onClick={() => setType('general')}
-            >
-                General Jokes
-            </button>
+            </select>
 
             {filteredJokes.map(joke => (
-                <div className="py-2 px-4 m-2 bg-yellow-400 rounded-2xl">
-                    <p className="font-bold"> {joke.setup}</p>
-                    <p> {joke.punchline}</p>
-                </div>
+                <Link
+                    href={`jokes/${joke.id}`}
+                >
+                    <div className="py-2 px-4 m-2 bg-yellow-400 rounded-2xl">
+                        <p className="font-bold"> {joke.setup}</p>
+                        {/* <p> {joke.punchline}</p> */}
+                    </div>
+                </Link>
             ))}
         </>
     )
